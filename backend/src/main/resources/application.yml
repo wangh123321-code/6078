@@ -1,0 +1,33 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI:mongodb://admin:admin123@localhost:27017/cat_pedigree?authSource=admin}
+      database: ${SPRING_DATA_MONGODB_DATABASE:cat_pedigree}
+      auto-index-creation: true
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+jwt:
+  secret: cat-pedigree-secret-key-for-jwt-token-generation-please-change-in-production
+  expiration: 86400000
+
+blockchain:
+  node-url: ${BLOCKCHAIN_NODE_URL:}
+  contract-address: ${BLOCKCHAIN_CONTRACT_ADDRESS:}
+
+logging:
+  level:
+    com.catpedigree: DEBUG
+    org.springframework.security: INFO

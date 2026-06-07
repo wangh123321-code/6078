@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: cat-pedigree-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: cat_pedigree
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - cat-pedigree-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cat-pedigree-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://admin:admin123@mongodb:27017/cat_pedigree?authSource=admin
+      SPRING_DATA_MONGODB_DATABASE: cat_pedigree
+    depends_on:
+      - mongodb
+    networks:
+      - cat-pedigree-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: cat-pedigree-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - cat-pedigree-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  cat-pedigree-network:
+    driver: bridge

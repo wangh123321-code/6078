@@ -12,6 +12,7 @@ build/
 .vscode/
 *.swp
 *.swo
+gj.md
 *~
 .project
 .classpath

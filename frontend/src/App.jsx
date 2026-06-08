@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { useUserStore } from './store/userStore.js'
+import useUserStore from './store/userStore.js'
 import Login from './pages/Login.jsx'
 import Layout from './components/Layout.jsx'
 import Dashboard from './pages/Dashboard.jsx'

@@ -13,7 +13,7 @@ import {
 } from 'antd'
 import {
   SearchOutlined,
-  CatOutlined,
+  IdcardOutlined,
   CheckCircleOutlined,
   LinkOutlined,
 } from '@ant-design/icons'
@@ -84,7 +84,7 @@ function PedigreeSearch() {
     }}>
       <Card style={{ maxWidth: 1200, margin: '0 auto', borderRadius: 12, boxShadow: '0 10px 40px rgba(0,0,0,0.2)' }}>
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <CatOutlined style={{ fontSize: 48, color: '#1890ff', marginBottom: 16 }} />
+          <IdcardOutlined style={{ fontSize: 48, color: '#1890ff', marginBottom: 16 }} />
           <Title level={3} style={{ margin: 0, color: '#333' }}>
             纯种猫血统查询
           </Title>
@@ -101,7 +101,7 @@ function PedigreeSearch() {
             onChange={(e) => setCatNo(e.target.value)}
             onPressEnter={handleSearch}
             allowClear
-            prefix={<CatOutlined />}
+            prefix={<IdcardOutlined />}
           />
           <Button
             type="primary"

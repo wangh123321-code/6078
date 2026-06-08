@@ -60,3 +60,10 @@ export const getKittens = (id) => {
     method: 'get',
   })
 }
+
+export const deleteBreeding = (id) => {
+  return request({
+    url: `/breedings/${id}`,
+    method: 'delete',
+  })
+}

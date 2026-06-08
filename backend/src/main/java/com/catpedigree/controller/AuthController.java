@@ -38,7 +38,7 @@ public class AuthController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String token = jwtTokenUtil.generateToken(userDetails);
 
-        User user = userService.getUserById(userDetails.getUsername());
+        User user = userService.getUserByUsername(userDetails.getUsername());
 
         Map<String, Object> data = new HashMap<>();
         data.put("token", token);
@@ -55,9 +55,9 @@ public class AuthController {
 
     @GetMapping("/me")
     public Result<User> getCurrentUser() {
-        String userId = (String) org.springframework.security.core.context.SecurityContextHolder
+        UserDetails userDetails = (UserDetails) org.springframework.security.core.context.SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal();
-        User user = userService.getUserById(userId);
+        User user = userService.getUserByUsername(userDetails.getUsername());
         return Result.success(user);
     }
 }

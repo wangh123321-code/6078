@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout, Menu, Dropdown, Avatar } from 'antd'
 import {
   DashboardOutlined,
-  CatOutlined,
+  IdcardOutlined,
   HeartOutlined,
   FileTextOutlined,
   UserOutlined,
@@ -40,7 +40,7 @@ function AppLayout() {
     },
     {
       key: '/cats',
-      icon: <CatOutlined />,
+      icon: <IdcardOutlined />,
       label: '猫咪管理',
     },
     {
@@ -89,7 +89,7 @@ function AppLayout() {
     <Layout style={{ minHeight: '100vh' }}>
       <Header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div className="logo">
-          <CatOutlined style={{ marginRight: 8 }} />
+          <IdcardOutlined style={{ marginRight: 8 }} />
           纯种猫血统管理系统
         </div>
         <div className="user-info">

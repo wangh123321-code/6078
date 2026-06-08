@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Input, Button, Card, message } from 'antd'
-import { UserOutlined, LockOutlined, CatOutlined } from '@ant-design/icons'
+import { UserOutlined, LockOutlined, SafetyOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import useUserStore from '../store/userStore.js'
 
@@ -32,7 +32,7 @@ function Login() {
     }}>
       <Card style={{ width: 400, boxShadow: '0 10px 40px rgba(0,0,0,0.2)' }}>
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <CatOutlined style={{ fontSize: 48, color: '#1890ff', marginBottom: 16 }} />
+          <SafetyOutlined style={{ fontSize: 48, color: '#1890ff', marginBottom: 16 }} />
           <h2 style={{ margin: 0, color: '#333' }}>纯种猫血统管理系统</h2>
           <p style={{ color: '#666', marginTop: 8 }}>区块链存证 · 不可伪造 · 快速查询</p>
         </div>

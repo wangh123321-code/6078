@@ -30,4 +30,5 @@ blockchain:
 logging:
   level:
     com.catpedigree: DEBUG
-    org.springframework.security: INFO
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col, Card, Statistic, List, Tag, Typography } from 'antd'
 import {
-  CatOutlined,
+  IdcardOutlined,
   TeamOutlined,
   FileTextOutlined,
   LinkOutlined,
@@ -53,7 +53,7 @@ function Dashboard() {
     {
       title: '注册猫咪',
       value: stats.totalCats,
-      icon: <CatOutlined style={{ fontSize: 32, color: '#1890ff' }} />,
+      icon: <IdcardOutlined style={{ fontSize: 32, color: '#1890ff' }} />,
       color: '#e6f7ff',
     },
     {

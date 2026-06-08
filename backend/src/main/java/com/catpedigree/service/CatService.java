@@ -36,7 +36,8 @@ public class CatService {
         }
 
         String currentUserId = SecurityContextHolder.getContext().getAuthentication().getName();
-        var currentUser = userRepository.findById(currentUserId).orElseThrow();
+        var currentUser = userRepository.findById(currentUserId)
+                .orElseThrow(() -> new IllegalArgumentException("用户信息不存在，请重新登录"));
 
         Cat cat = new Cat();
         BeanUtils.copyProperties(dto, cat);
@@ -72,7 +73,8 @@ public class CatService {
                 .orElseThrow(() -> new IllegalArgumentException("猫咪不存在: " + id));
 
         String currentUserId = SecurityContextHolder.getContext().getAuthentication().getName();
-        var currentUser = userRepository.findById(currentUserId).orElseThrow();
+        var currentUser = userRepository.findById(currentUserId)
+                .orElseThrow(() -> new IllegalArgumentException("用户信息不存在，请重新登录"));
 
         BeanUtils.copyProperties(dto, cat, "id", "catNo");
 

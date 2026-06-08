@@ -35,7 +35,8 @@ public class BreedingService {
                 .orElseThrow(() -> new IllegalArgumentException("母猫不存在: " + dto.getMotherCatNo()));
 
         String currentUserId = SecurityContextHolder.getContext().getAuthentication().getName();
-        var currentUser = userRepository.findById(currentUserId).orElseThrow();
+        var currentUser = userRepository.findById(currentUserId)
+                .orElseThrow(() -> new IllegalArgumentException("用户信息不存在，请重新登录"));
 
         Breeding breeding = new Breeding();
         breeding.setBreedingNo("BREED-" + System.currentTimeMillis());

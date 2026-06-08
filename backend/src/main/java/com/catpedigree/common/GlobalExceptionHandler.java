@@ -11,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -21,6 +22,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Result<Void>> handleIllegalArgumentException(IllegalArgumentException e) {
         log.warn("参数错误: {}", e.getMessage());
         return ResponseEntity.badRequest().body(Result.error(400, e.getMessage()));
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<Result<Void>> handleNoSuchElementException(NoSuchElementException e) {
+        log.warn("数据不存在: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(Result.error(401, "登录已过期，请重新登录"));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -51,10 +59,17 @@ public class GlobalExceptionHandler {
                 .body(Result.error(403, "权限不足，无法访问该资源"));
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<Result<Void>> handleNullPointerException(NullPointerException e) {
+        log.error("空指针异常", e);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Result.error(500, "服务器繁忙，请稍后重试"));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Result<Void>> handleException(Exception e) {
         log.error("系统异常", e);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(Result.error(500, "系统内部错误: " + e.getMessage()));
+                .body(Result.error(500, "服务器繁忙，请稍后重试"));
     }
 }

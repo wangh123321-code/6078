@@ -36,6 +36,12 @@ request.interceptors.response.use(
       window.location.href = '/login'
     } else if (error.response?.status === 403) {
       message.error('权限不足，无法访问该资源')
+    } else if (error.response?.status === 400) {
+      const errorMsg = error.response.data?.message || '请求参数错误'
+      message.error(errorMsg)
+    } else if (error.response?.status >= 500) {
+      const errorMsg = error.response.data?.message || '服务器繁忙，请稍后重试'
+      message.error(errorMsg)
     } else {
       message.error(error.message || '网络错误')
     }

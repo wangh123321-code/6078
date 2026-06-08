@@ -34,4 +34,18 @@ public class PedigreeNode {
     private PedigreeNode father;
 
     private PedigreeNode mother;
+
+    private Boolean hasCycle = false;
+
+    private Boolean isInbreeding = false;
+
+    private String cycleInfo;
+
+    private String inbreedingInfo;
+
+    private Integer x;
+
+    private Integer y;
+
+    private Double inbreedingCoefficient;
 }

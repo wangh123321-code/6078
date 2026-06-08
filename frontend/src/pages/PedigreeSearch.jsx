@@ -10,6 +10,7 @@ import {
   Tag,
   Tabs,
   List,
+  Switch,
 } from 'antd'
 import {
   SearchOutlined,
@@ -22,6 +23,7 @@ import dayjs from 'dayjs'
 import { getCatByNo, getPedigree, searchCats } from '../api/cat.js'
 import { verifyCatOnChain } from '../api/blockchain.js'
 import PedigreeTree from '../components/PedigreeTree.jsx'
+import PedigreeTreeOptimized from '../components/PedigreeTreeOptimized.jsx'
 
 const { Title, Text } = Typography
 
@@ -33,6 +35,7 @@ function PedigreeSearch() {
   const [pedigree, setPedigree] = useState(null)
   const [verifyResult, setVerifyResult] = useState(null)
   const [searchResults, setSearchResults] = useState([])
+  const [useOptimizedRender, setUseOptimizedRender] = useState(true)
 
   const handleSearch = async () => {
     if (!catNo.trim()) {
@@ -275,14 +278,40 @@ function PedigreeSearch() {
                 label: '五代系谱图',
                 children: (
                   <div>
-                    <Card type="inner">
-                      <PedigreeTree
-                        data={pedigree}
-                        onNodeClick={(node) => {
-                          setCatNo(node.catNo)
-                          handleSearch()
-                        }}
-                      />
+                    <Card
+                      type="inner"
+                      extra={
+                        <Space>
+                          <Tag color={useOptimizedRender ? 'green' : 'default'}>
+                            {useOptimizedRender ? '优化版 (Canvas)' : '原版 (DOM)'}
+                          </Tag>
+                          <Switch
+                            checked={useOptimizedRender}
+                            onChange={setUseOptimizedRender}
+                            checkedChildren="优化"
+                            unCheckedChildren="原版"
+                          />
+                        </Space>
+                      }
+                    >
+                      {useOptimizedRender ? (
+                        <PedigreeTreeOptimized
+                          data={pedigree}
+                          onNodeClick={(node) => {
+                            setCatNo(node.catNo)
+                            handleSearch()
+                          }}
+                          maxGeneration={5}
+                        />
+                      ) : (
+                        <PedigreeTree
+                          data={pedigree}
+                          onNodeClick={(node) => {
+                            setCatNo(node.catNo)
+                            handleSearch()
+                          }}
+                        />
+                      )}
                     </Card>
                   </div>
                 ),

@@ -13,6 +13,7 @@ import CertificatePage from './pages/CertificatePage.jsx'
 import VerifyPage from './pages/VerifyPage.jsx'
 import UserList from './pages/UserList.jsx'
 import PedigreeSearch from './pages/PedigreeSearch.jsx'
+import PerformanceTest from './pages/PerformanceTest.jsx'
 
 function App() {
   const isLoggedIn = useUserStore((state) => state.isLoggedIn)
@@ -26,6 +27,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/verify" element={<VerifyPage />} />
       <Route path="/search" element={<PedigreeSearch />} />
+      <Route path="/performance-test" element={<PerformanceTest />} />
       <Route
         path="/"
         element={
